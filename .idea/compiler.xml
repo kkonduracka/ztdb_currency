@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Gradle Imported" enabled="true">
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.26/8f8cf0372abf564913e9796623aac4c8ea44025a/lombok-1.18.26.jar" />
+        </processorPath>
+        <module name="ztdb_currency.backend.main" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="17">
+      <module name="backend" target="17" />
+      <module name="backend.main" target="17" />
+      <module name="backend.test" target="17" />
+      <module name="root" target="17" />
+      <module name="root.backend" target="17" />
+      <module name="root.backend.main" target="17" />
+      <module name="root.backend.test" target="17" />
+      <module name="root.main" target="17" />
+      <module name="root.test" target="17" />
+      <module name="root.webScraper" target="17" />
+      <module name="root.webScraper.main" target="17" />
+      <module name="root.webScraper.test" target="17" />
+      <module name="webScraper" target="17" />
+      <module name="webScraper.main" target="17" />
+      <module name="webScraper.test" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

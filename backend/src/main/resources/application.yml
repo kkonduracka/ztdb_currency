@@ -1,0 +1,20 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/ztdb
+    username: postgres
+    password: postgres
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+  data:
+    mongodb:
+      uri: mongodb://root:root@localhost:27017/ztdb?authSource=admin
+    elasticsearch:
+      rest:
+        uris: http://localhost:9200
