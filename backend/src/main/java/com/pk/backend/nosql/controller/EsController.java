@@ -10,6 +10,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/es")
 @RequiredArgsConstructor
+@CrossOrigin
 public class EsController {
 
     private final EsRepo esRepo;

@@ -32,7 +32,7 @@ public class WebScraperService {
         this.mongoRepo = mongoRepo;
         this.dataRepo = dataRepo;
         this.currencyRepo = currencyRepo;
-        getHtml();
+        //getHtml();
     }
 
     public void getHtml() {
@@ -41,9 +41,9 @@ public class WebScraperService {
                     .get();
 
             for (Element element : document.body().getElementsByClass("simpTblRow")) {
-                //saveToEs(element);
+                saveToEs(element);
                 //saveToMongo(element);
-                saveToPostgres(element);
+                //saveToPostgres(element);
             }
 
         } catch (IOException e) {

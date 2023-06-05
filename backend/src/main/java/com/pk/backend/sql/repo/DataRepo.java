@@ -8,4 +8,6 @@ import java.util.UUID;
 
 @Repository
 public interface DataRepo extends JpaRepository<SqlData, UUID> {
+
+    public SqlData findByName(String name);
 }

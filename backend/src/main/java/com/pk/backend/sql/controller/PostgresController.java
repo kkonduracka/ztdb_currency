@@ -12,6 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/postgres")
 @RequiredArgsConstructor
+@CrossOrigin
 public class PostgresController {
 
     private final DataRepo dataRepo;

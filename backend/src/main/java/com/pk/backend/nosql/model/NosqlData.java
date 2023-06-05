@@ -1,10 +1,12 @@
 package com.pk.backend.nosql.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.mongodb.core.mapping.MongoId;
@@ -46,5 +48,8 @@ public class NosqlData {
     @Field(value = "currencyModel", type = Nested)
     @org.springframework.data.mongodb.core.mapping.Field(value = "currencyModel")
     private List<CurrencyModel> currencyModel;
+
+    @Transient
+    private String time;
 
 }

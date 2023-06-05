@@ -11,6 +11,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/mongo")
 @RequiredArgsConstructor
+@CrossOrigin
 public class MongoController {
 
     private final MongoRepo mongoRepo;
