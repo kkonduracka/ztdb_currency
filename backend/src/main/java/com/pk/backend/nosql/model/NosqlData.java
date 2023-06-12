@@ -9,6 +9,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.util.List;
@@ -25,23 +26,23 @@ public class NosqlData {
     @MongoId
     private UUID id;
 
-    @Field("symbol")
+    @Field(name = "symbol", type = FieldType.Keyword)
     @org.springframework.data.mongodb.core.mapping.Field("symbol")
     private String symbol;
 
-    @Field("name")
+    @Field(name = "name", type = FieldType.Keyword)
     @org.springframework.data.mongodb.core.mapping.Field("name")
     private String name;
 
-    @Field("lastPrice")
+    @Field(name = "lastPrice", type = FieldType.Double)
     @org.springframework.data.mongodb.core.mapping.Field("lastPrice")
-    private String lastPrice;
+    private Double lastPrice;
 
-    @Field("change")
+    @Field(name = "change", type = FieldType.Keyword)
     @org.springframework.data.mongodb.core.mapping.Field("change")
     private String change;
 
-    @Field("changePercent")
+    @Field(name = "changePercent", type = FieldType.Keyword)
     @org.springframework.data.mongodb.core.mapping.Field("changePercent")
     private String changePercent;
 

@@ -1,4 +1,4 @@
-version: '3.1'
+version: '2.13'
 
 services:
   mongodb:
@@ -25,21 +25,23 @@ services:
       - postgresql_data:/var/lib/postgresql/data
 
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.15.0
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.8.1
+    container_name: elasticsearch
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+      - 9300:9300
     restart: always
     environment:
+      - xpack.security.enabled=false
       - discovery.type=single-node
-      - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - http.max_content_length=200mb
+      - "ES_JAVA_OPTS=-Xms2g -Xmx2g"
     ulimits:
       memlock:
         soft: -1
         hard: -1
-    ports:
-      - 9200:9200
-      - 9300:9300
-    volumes:
-      - elasticsearch_data:/usr/share/elasticsearch/data
 
 volumes:
   mongodb_data:

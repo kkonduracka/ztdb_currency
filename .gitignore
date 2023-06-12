@@ -36,5 +36,5 @@ out/
 ### VS Code ###
 .vscode/
 
-frontend/node_modules/
+node_modules/
 frontend/README.md

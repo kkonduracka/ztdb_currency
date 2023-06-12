@@ -10,9 +10,14 @@ import java.time.LocalDate;
 public class CurrencyModel {
     @Field(name = "date", type = FieldType.Date)
     private LocalDate date;
-    private String open;
-    private String high;
-    private String low;
-    private String close;
-    private String adjClose;
+    @Field(name = "open", type = FieldType.Double)
+    private Double open;
+    @Field(name = "high", type = FieldType.Double)
+    private Double high;
+    @Field(name = "low", type = FieldType.Double)
+    private Double low;
+    @Field(name = "close", type = FieldType.Double)
+    private Double close;
+    @Field(name = "adjClose", type = FieldType.Double)
+    private Double adjClose;
 }

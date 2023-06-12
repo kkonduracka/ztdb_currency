@@ -167,7 +167,7 @@ function App() {
               <TableRow
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
-                <TableCell align="center">Znajdż dni w ktrych wartość otwarcia jest większa niż zamknięcia</TableCell>
+                <TableCell align="center">Znajdź dni w których wartość otwarcia jest większa niż zamknięcia</TableCell>
                 <TableCell align="center">{`${tableData.testCase3.postgres}ms`}</TableCell>
                 <TableCell align="center">{`${tableData.testCase3.mongoDB}ms`}</TableCell>
                 <TableCell align="center">{`${tableData.testCase3.elastic}ms`}</TableCell>
@@ -180,7 +180,7 @@ function App() {
               <TableRow
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
-                <TableCell align="center">Znajdż dni w ktrych wartość otwarcia jest większa niż zamknięcia</TableCell>
+                <TableCell align="center">Posortuj pogrupowane dane (rok, miesiąc) dla waluty</TableCell>
                 <TableCell align="center">{`${tableData.testCase4.postgres}ms`}</TableCell>
                 <TableCell align="center">{`${tableData.testCase4.mongoDB}ms`}</TableCell>
                 <TableCell align="center">{`${tableData.testCase4.elastic}ms`}</TableCell>

@@ -97,7 +97,7 @@ public class WebScraperService {
         item.setId(UUID.randomUUID());
         item.setSymbol(element.child(0).text());
         item.setName(element.child(1).text());
-        item.setLastPrice(element.child(2).text());
+        item.setLastPrice(Double.valueOf(element.child(2).text().replace(",", "")));
         item.setChange(element.child(3).text());
         item.setChangePercent(element.child(4).text());
         item.setCurrencyModel(getCurrencyModel(element.child(0).text().trim().split("=")[0]));
@@ -109,7 +109,7 @@ public class WebScraperService {
         item.setId(UUID.randomUUID());
         item.setSymbol(element.child(0).text());
         item.setName(element.child(1).text());
-        item.setLastPrice(element.child(2).text());
+        item.setLastPrice(Double.valueOf(element.child(2).text().replace(",", "")));
         item.setChange(element.child(3).text());
         item.setChangePercent(element.child(4).text());
         item.setCurrencyModel(getCurrencyModel(element.child(0).text().trim().split("=")[0]));
@@ -133,11 +133,11 @@ public class WebScraperService {
     private CurrencyModel getCurrencyModel(Element element) throws IOException {
         var item = new CurrencyModel();
         item.setDate(LocalDate.parse(element.child(0).text(), formatter));
-        item.setOpen(element.child(1).text());
-        item.setHigh(element.child(2).text());
-        item.setLow(element.child(3).text());
-        item.setClose(element.child(4).text());
-        item.setAdjClose(element.child(5).text());
+        item.setOpen(Double.valueOf(element.child(1).text().replace(",", "")));
+        item.setHigh(Double.valueOf(element.child(2).text().replace(",", "")));
+        item.setLow(Double.valueOf(element.child(3).text().replace(",", "")));
+        item.setClose(Double.valueOf(element.child(4).text().replace(",", "")));
+        item.setAdjClose(Double.valueOf(element.child(5).text().replace(",", "")));
         return item;
     }
 }

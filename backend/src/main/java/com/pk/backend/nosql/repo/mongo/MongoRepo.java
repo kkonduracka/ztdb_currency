@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface MongoRepo extends org.springframework.data.mongodb.repository.MongoRepository<com.pk.backend.nosql.model.NosqlData, java.util.UUID>{
 
-    public NosqlData findByName(String name);
+    public List<NosqlData> findAllByName(String name);
 
     public NosqlData findByNameAndCurrencyModelDateBefore(String currency, LocalDate endDate);
 
