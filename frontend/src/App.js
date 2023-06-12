@@ -154,7 +154,7 @@ function App() {
               <TableRow
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
-              <TableCell align="center">Dni kiedy wartość podczas otwarcia była między 70 a 100% wartości maksymalnej</TableCell>
+              <TableCell align="center">Dni kiedy wartość podczas otwarcia była między 70% a 100% wartości maksymalnej</TableCell>
               <TableCell align="center">{`${tableData.testCase2.postgres}ms`}</TableCell>
               <TableCell align="center">{`${tableData.testCase2.mongoDB}ms`}</TableCell>
               <TableCell align="center">{`${tableData.testCase2.elastic}ms`}</TableCell>
