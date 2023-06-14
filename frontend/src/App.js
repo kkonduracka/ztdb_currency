@@ -141,7 +141,7 @@ function App() {
                   <TableRow
                       sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                   >
-                    <TableCell align="center">Maksymalna wartość waluty w 2023 EUR/USD</TableCell>
+                    <TableCell align="center">Maksymalna wartość waluty w 2023 EUR/USD i USD/GBP</TableCell>
                     <TableCell align="center">{`${tableData.testCase1.postgres}ms`}</TableCell>
                     <TableCell align="center">{`${tableData.testCase1.mongoDB}ms`}</TableCell>
                     <TableCell align="center">{`${tableData.testCase1.elastic}ms`}</TableCell>
@@ -154,7 +154,7 @@ function App() {
               <TableRow
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
-              <TableCell align="center">Dni kiedy wartość podczas otwarcia była między 70% a 100% wartości maksymalnej</TableCell>
+              <TableCell align="center">Dni kiedy wartość podczas otwarcia była między 70% a 100% wartości maksymalnej EUR/USD i USD/GBP</TableCell>
               <TableCell align="center">{`${tableData.testCase2.postgres}ms`}</TableCell>
               <TableCell align="center">{`${tableData.testCase2.mongoDB}ms`}</TableCell>
               <TableCell align="center">{`${tableData.testCase2.elastic}ms`}</TableCell>
@@ -167,7 +167,7 @@ function App() {
               <TableRow
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
-                <TableCell align="center">Znajdź dni w których wartość otwarcia jest większa niż zamknięcia</TableCell>
+                <TableCell align="center">Znajdź dni w których wartość otwarcia jest większa niż zamknięcia EUR/USD i USD/GBP</TableCell>
                 <TableCell align="center">{`${tableData.testCase3.postgres}ms`}</TableCell>
                 <TableCell align="center">{`${tableData.testCase3.mongoDB}ms`}</TableCell>
                 <TableCell align="center">{`${tableData.testCase3.elastic}ms`}</TableCell>
@@ -180,7 +180,7 @@ function App() {
               <TableRow
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
-                <TableCell align="center">Posortuj pogrupowane dane (rok, miesiąc) dla waluty</TableCell>
+                <TableCell align="center">Posortuj pogrupowane dane (rok, miesiąc) dla waluty EUR/USD i USD/GBP</TableCell>
                 <TableCell align="center">{`${tableData.testCase4.postgres}ms`}</TableCell>
                 <TableCell align="center">{`${tableData.testCase4.mongoDB}ms`}</TableCell>
                 <TableCell align="center">{`${tableData.testCase4.elastic}ms`}</TableCell>

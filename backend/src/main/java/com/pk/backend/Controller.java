@@ -10,11 +10,13 @@ import com.pk.backend.sql.model.SqlData;
 import com.pk.backend.sql.repo.CurrencyRepo;
 import com.pk.backend.sql.repo.DataRepo;
 import lombok.AllArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -135,43 +137,61 @@ public class Controller {
 
     private void getSortedCloseGroupByMonthForEs() {
         var data = esRepo.findByName("EUR/USD").getCurrencyModel();
-
         //data group by year and month
         var groupedData = data.stream().collect(Collectors.groupingBy(currencyModel -> currencyModel.getDate().toString().substring(0, 7)));
         //data sorted by close
         var sortedData = groupedData.values().stream().peek(list -> list.sort(Comparator.comparingDouble(com.pk.backend.nosql.model.CurrencyModel::getClose))).toList();
+        data = esRepo.findByName("USD/GBP").getCurrencyModel();
+        //data group by year and month
+        groupedData = data.stream().collect(Collectors.groupingBy(currencyModel -> currencyModel.getDate().toString().substring(0, 7)));
+        //data sorted by close
+        sortedData = groupedData.values().stream().peek(list -> list.sort(Comparator.comparingDouble(com.pk.backend.nosql.model.CurrencyModel::getClose))).toList();
     }
 
     private void getSortedCloseGroupByMonthForMongo() {
         var data = getNosqlData("EUR/USD");
-
         //data group by year and month
         var groupedData = data.getCurrencyModel().stream().collect(Collectors.groupingBy(currencyModel -> currencyModel.getDate().toString().substring(0, 7)));
         //data sorted by close
         var sortedData = groupedData.values().stream().peek(list -> list.sort(Comparator.comparingDouble(com.pk.backend.nosql.model.CurrencyModel::getClose))).toList();
+        data = getNosqlData("USD/GBP");
+        //data group by year and month
+        groupedData = data.getCurrencyModel().stream().collect(Collectors.groupingBy(currencyModel -> currencyModel.getDate().toString().substring(0, 7)));
+        //data sorted by close
+        sortedData = groupedData.values().stream().peek(list -> list.sort(Comparator.comparingDouble(com.pk.backend.nosql.model.CurrencyModel::getClose))).toList();
     }
 
-    private void getSortedCloseGroupByMonthForPg() {
+    public void getSortedCloseGroupByMonthForPg() {
         var data = currencyRepo.findAllBySqlDataId(dataRepo.findByName("EUR/USD").getId());
-
         //data group by year and month
         var groupedData = data.stream().collect(Collectors.groupingBy(currencyModel -> currencyModel.getDate().toString().substring(0, 7)));
         //data sorted by close
         var sortedData = groupedData.values().stream().peek(list -> list.sort(Comparator.comparingDouble(currencyModel -> Double.parseDouble(currencyModel.getClose())))).toList();
+        data = currencyRepo.findAllBySqlDataId(dataRepo.findByName("USD/GBP").getId());
+        //data group by year and month
+        groupedData = data.stream().collect(Collectors.groupingBy(currencyModel -> currencyModel.getDate().toString().substring(0, 7)));
+        //data sorted by close
+        sortedData = groupedData.values().stream().peek(list -> list.sort(Comparator.comparingDouble(currencyModel -> Double.parseDouble(currencyModel.getClose())))).toList();
     }
 
     private void getDaysWhereOpenIsHigherThanCloseForEs() {
         var data = esRepo.findByName("EUR/USD");
+        data.getCurrencyModel().stream().filter(currencyModel -> currencyModel.getOpen() > currencyModel.getClose()).count();
+        data = esRepo.findByName("USD/GBP");
         data.getCurrencyModel().stream().filter(currencyModel -> currencyModel.getOpen() > currencyModel.getClose()).count();
     }
 
     private void getDaysWhereOpenIsHigherThanCloseForMongo() {
         var data = getNosqlData("EUR/USD");
         data.getCurrencyModel().stream().filter(currencyModel -> currencyModel.getOpen() > currencyModel.getClose()).count();
+        data = getNosqlData("USD/GBP");
+        data.getCurrencyModel().stream().filter(currencyModel -> currencyModel.getOpen() > currencyModel.getClose()).count();
     }
 
-    private void getDaysWhereOpenIsHigherThanCloseForPg() {
+    public void getDaysWhereOpenIsHigherThanCloseForPg() {
         var data = currencyRepo.findAllBySqlDataId(dataRepo.findByName("EUR/USD").getId());
+        data.stream().filter(currencyModel -> Double.parseDouble(currencyModel.getOpen()) > Double.parseDouble(currencyModel.getClose())).count();
+        data = currencyRepo.findAllBySqlDataId(dataRepo.findByName("USD/GBP").getId());
         data.stream().filter(currencyModel -> Double.parseDouble(currencyModel.getOpen()) > Double.parseDouble(currencyModel.getClose())).count();
     }
 
@@ -179,30 +199,42 @@ public class Controller {
     private void getNumberOfDaysWhereOpenWas70To100PercentOfHighForEs() {
         var data = esRepo.findByName("EUR/USD");
         data.getCurrencyModel().stream().filter(currencyModel -> currencyModel.getOpen() >= currencyModel.getHigh() * 0.7 && currencyModel.getOpen() <= currencyModel.getHigh()).count();
+        data = esRepo.findByName("USD/GBP");
+        data.getCurrencyModel().stream().filter(currencyModel -> currencyModel.getOpen() >= currencyModel.getHigh() * 0.7 && currencyModel.getOpen() <= currencyModel.getHigh()).count();
     }
 
     private void getNumberOfDaysWhereOpenWas70To100PercentOfHighForMongo() {
         var data = getNosqlData("EUR/USD");
         data.getCurrencyModel().stream().filter(currencyModel -> currencyModel.getOpen() >= currencyModel.getHigh() * 0.7 && currencyModel.getOpen() <= currencyModel.getHigh()).count();
+        data = getNosqlData("USD/GBP");
+        data.getCurrencyModel().stream().filter(currencyModel -> currencyModel.getOpen() >= currencyModel.getHigh() * 0.7 && currencyModel.getOpen() <= currencyModel.getHigh()).count();
     }
 
-    private void getNumberOfDaysWhereOpenWas70To100PercentOfHighForPg() {
+    public void getNumberOfDaysWhereOpenWas70To100PercentOfHighForPg() {
         var data = currencyRepo.findAllBySqlDataId(dataRepo.findByName("EUR/USD").getId());
+        data.stream().filter(currencyModel -> Double.parseDouble(currencyModel.getOpen()) >= Double.parseDouble(currencyModel.getHigh()) * 0.7 && Double.parseDouble(currencyModel.getOpen()) <= Double.parseDouble(currencyModel.getHigh())).count();
+        data = currencyRepo.findAllBySqlDataId(dataRepo.findByName("USD/GBP").getId());
         data.stream().filter(currencyModel -> Double.parseDouble(currencyModel.getOpen()) >= Double.parseDouble(currencyModel.getHigh()) * 0.7 && Double.parseDouble(currencyModel.getOpen()) <= Double.parseDouble(currencyModel.getHigh())).count();
     }
 
     private void getMaxHighCurrencyEURUSDValueIn2023ForEs() {
         var data = esRepo.findByName("EUR/USD");
         data.getCurrencyModel().stream().filter(currencyModel -> currencyModel.getDate().getYear() == 2023).mapToDouble(x -> x.getHigh()).max();
+        data = esRepo.findByName("USD/GBP");
+        data.getCurrencyModel().stream().filter(currencyModel -> currencyModel.getDate().getYear() == 2023).mapToDouble(x -> x.getHigh()).max();
     }
 
     private void getMaxHighCurrencyEURUSDValueIn2023ForMongo() {
         var data = getNosqlData("EUR/USD");
         data.getCurrencyModel().stream().filter(currencyModel -> currencyModel.getDate().getYear() == 2023).mapToDouble(x -> x.getHigh()).max();
+        data = getNosqlData("USD/GBP");
+        data.getCurrencyModel().stream().filter(currencyModel -> currencyModel.getDate().getYear() == 2023).mapToDouble(x -> x.getHigh()).max();
     }
 
-    private void getMaxHighCurrencyEURUSDValueIn2023ForPg() {
+    public void getMaxHighCurrencyEURUSDValueIn2023ForPg() {
         var data = currencyRepo.findAllBySqlDataId(dataRepo.findByName("EUR/USD").getId());
+        data.stream().filter(currencyModel -> currencyModel.getDate().getYear() == 2023).mapToDouble(x -> Double.parseDouble(x.getHigh())).max();
+        data = currencyRepo.findAllBySqlDataId(dataRepo.findByName("USD/GBP").getId());
         data.stream().filter(currencyModel -> currencyModel.getDate().getYear() == 2023).mapToDouble(x -> Double.parseDouble(x.getHigh())).max();
     }
 
